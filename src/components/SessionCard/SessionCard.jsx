@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './SessionCard.module.css';
 import { Button, Card, CardContent, Typography, Chip } from '@mui/material';
-import { AccessTime as TimeIcon, LocationOn as LocationIcon, PeopleAlt as PeopleIcon } from '@mui/icons-material';
+import { AccessTime as TimeIcon, LocationOn as LocationIcon, PeopleAlt as PeopleIcon, Link as LinkIcon } from '@mui/icons-material';
 
 const SessionCard = ({ session, onJoin }) => {
-  let formattedTime = "Time is not right";
+  let formattedTime = "Time not specified";
   if (session.time) {
     try {
       formattedTime = new Intl.DateTimeFormat('en-US', {
@@ -14,7 +14,7 @@ const SessionCard = ({ session, onJoin }) => {
         minute: '2-digit'
       }).format(new Date(session.time));
     } catch (error) {
-      console.error("Wrong format", error);
+      console.error("Error formatting time:", error);
     }
   }
 
@@ -25,16 +25,28 @@ const SessionCard = ({ session, onJoin }) => {
           <Typography variant="h6" className={styles.title}>
             {session.title}
           </Typography>
-          <Chip label={session.subject} size="small" color="primary" />
+          <Chip label={session.format === "online" ? "Online" : "Offline"} size="small" color="primary" />
         </div>
 
+        {/* Time */}
         <div className={styles.details}>
           <Typography variant="body2" className={styles.detailItem}>
             <TimeIcon fontSize="small" /> {formattedTime}
           </Typography>
-          <Typography variant="body2" className={styles.detailItem}>
-            <LocationIcon fontSize="small" /> {session.location || "No Place"}
-          </Typography>
+
+          {/* Show location if offline, meeting link if online */}
+          {session.format === "offline" ? (
+            <Typography variant="body2" className={styles.detailItem}>
+              <LocationIcon fontSize="small" /> {session.location || "Location not specified"}
+            </Typography>
+          ) : (
+            <Typography variant="body2" className={styles.detailItem}>
+              <LinkIcon fontSize="small" /> 
+              <a href={session.meeting_link} target="_blank" rel="noopener noreferrer">
+                Join Meeting
+              </a>
+            </Typography>
+          )}
         </div>
 
         <div className={styles.footer}>
@@ -46,9 +58,9 @@ const SessionCard = ({ session, onJoin }) => {
             color="primary"
             size="small"
             onClick={() => onJoin(session.id)}
-            disabled={session.participants?.length >= session.maxParticipants}
+            disabled={session.participants?.length >= session.max_participants}
           >
-            {session.participants?.length >= session.maxParticipants ? "Full" : "Join"}
+            {session.participants?.length >= session.max_participants ? "Full" : "Join"}
           </Button>
         </div>
       </CardContent>

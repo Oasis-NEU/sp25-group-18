@@ -1,3 +1,3 @@
-import Create from "../../components/CreateEvent/CreatEvent";
+import CreateEvent from "../../components/CreateEvent/CreateEvent";
 
-export default Create;
+export default CreateEvent;
