@@ -1,19 +1,18 @@
 import React, { useState } from "react";
+import "./CreateEvent.css";
+import "../../index.css";
 
 const CreateEventForm = () => {
   // Existing state for the other inputs
-  const [eventName, setEventName] = useState("");
   const [classCode, setClassCode] = useState("");
   const [location, setLocation] = useState("online");
   const [time, setTime] = useState("");
-  const [userCount, setUserCount] = useState(0);
+  const [userCount, setUserCount] = useState("Attendees");
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Collect all data, including the new description field
     const eventData = {
-      eventName,
       classCode,
       location,
       time,
@@ -28,26 +27,14 @@ const CreateEventForm = () => {
     // Only update if the value is non-negative
     if (value >= 0) {
       setUserCount(value);
-    } else {
-      setUserCount(value);
     }
   };
 
-  // Apply a red border when the value is negative
-  const userCountInputStyle = userCount < 0 ? { borderColor: "red" } : {};
-
   return (
     <div className="main-container">
-      <h2 className="Create-Events">Create Event</h2>
-      <div>
+      <div className="create-event-form">
+        <h2 className="Create-Events">Create Event</h2>
         <form onSubmit={handleSubmit}>
-          {/* Event Name */}
-          <input
-            type="text"
-            placeholder="Event Name"
-            value={eventName}
-            onChange={(e) => setEventName(e.target.value)}
-          />
           {/* Class Code */}
           <input
             type="text"
@@ -73,8 +60,9 @@ const CreateEventForm = () => {
           <input
             type="number"
             value={userCount}
-            onChange={handleUserCountChange} // Updated to use custom handler
-            style={userCountInputStyle} // Apply the custom style
+            onChange={handleUserCountChange} // Custom handler for input change
+            min="0" // Prevent negative numbers
+            placeholder="User Count"
           />
           {/* Submit Button */}
           <button type="submit">Create Event</button>
