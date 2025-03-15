@@ -18,19 +18,16 @@ const Events = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      let { data, error } = await supabase
-        .from("studysessions")
-        .select("id, title, time, format, location, meeting_link, max_participants");
-  
+      let { data, error } = await supabase.from("studysessions").select("*");
       if (error) {
-        console.error("Error fetching events:", error);
+        console.error("Ошибка при загрузке событий:", error);
       } else {
-        console.log("Fetched events:", data);
+        console.log("Загруженные события:", data);
         setEvents(data);
         setFilteredEvents(data);
       }
     };
-  
+
     fetchEvents();
   }, []);
 
@@ -48,18 +45,21 @@ const Events = () => {
       filtered = filtered.filter(event => event.time?.startsWith(filters.date));
     } else if (filters.date === "weekend") {
       const today = new Date();
-      const dayOfWeek = today.getDay();
+      const dayOfWeek = today.getDay(); // 0 (Sunday) - 6 (Saturday)
 
       let nextSaturday, nextSunday;
 
       if (dayOfWeek === 6) { 
+        // If today is Saturday, use today and tomorrow
         nextSaturday = today;
         nextSunday = new Date(today);
         nextSunday.setDate(today.getDate() + 1);
       } else if (dayOfWeek === 0) { 
+        // If today is Sunday, use today only
         nextSaturday = null;
         nextSunday = today;
       } else {
+        // Otherwise, find the next Saturday and Sunday
         nextSaturday = new Date();
         nextSaturday.setDate(today.getDate() + (6 - dayOfWeek));
         
