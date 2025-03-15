@@ -44,36 +44,10 @@ const Events = () => {
     if (filters.date && filters.date !== "weekend") {
       filtered = filtered.filter(event => event.time?.startsWith(filters.date));
     } else if (filters.date === "weekend") {
-      const today = new Date();
-      const dayOfWeek = today.getDay(); // 0 (Sunday) - 6 (Saturday)
-
-      let nextSaturday, nextSunday;
-
-      if (dayOfWeek === 6) { 
-        // If today is Saturday, use today and tomorrow
-        nextSaturday = today;
-        nextSunday = new Date(today);
-        nextSunday.setDate(today.getDate() + 1);
-      } else if (dayOfWeek === 0) { 
-        // If today is Sunday, use today only
-        nextSaturday = null;
-        nextSunday = today;
-      } else {
-        // Otherwise, find the next Saturday and Sunday
-        nextSaturday = new Date();
-        nextSaturday.setDate(today.getDate() + (6 - dayOfWeek));
-        
-        nextSunday = new Date(nextSaturday);
-        nextSunday.setDate(nextSaturday.getDate() + 1);
-      }
-
       filtered = filtered.filter(event => {
         if (!event.time) return false; 
-        const eventDate = new Date(event.time).toISOString().split('T')[0];
-        return (
-          (nextSaturday && eventDate === nextSaturday.toISOString().split('T')[0]) ||
-          (nextSunday && eventDate === nextSunday.toISOString().split('T')[0])
-        );
+        const eventDate = new Date(event.time);
+        return eventDate.getDay() === 6 || eventDate.getDay() === 0;
       });
     }
 
