@@ -4,7 +4,7 @@ import { Button, Card, CardContent, Typography, Chip } from '@mui/material';
 import { AccessTime as TimeIcon, LocationOn as LocationIcon, PeopleAlt as PeopleIcon } from '@mui/icons-material';
 
 const SessionCard = ({ session, onJoin }) => {
-  let formattedTime = "Время не указано";
+  let formattedTime = "Time is not right";
   if (session.time) {
     try {
       formattedTime = new Intl.DateTimeFormat('en-US', {
@@ -14,7 +14,7 @@ const SessionCard = ({ session, onJoin }) => {
         minute: '2-digit'
       }).format(new Date(session.time));
     } catch (error) {
-      console.error("Ошибка форматирования времени:", error);
+      console.error("Wrong format", error);
     }
   }
 
@@ -33,7 +33,7 @@ const SessionCard = ({ session, onJoin }) => {
             <TimeIcon fontSize="small" /> {formattedTime}
           </Typography>
           <Typography variant="body2" className={styles.detailItem}>
-            <LocationIcon fontSize="small" /> {session.location || "Место не указано"}
+            <LocationIcon fontSize="small" /> {session.location || "No Place"}
           </Typography>
         </div>
 
