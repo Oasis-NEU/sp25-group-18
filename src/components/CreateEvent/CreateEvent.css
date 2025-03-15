@@ -8,7 +8,7 @@
 }
 /* CreateEvent Form Styling */
 .create-event-form {
-  margin-left: 270px; /* This will push the form right of the sidebar */
+  margin-left: 200px; /* This will push the form right of the sidebar */
   padding: 20px;
   display: flex;
   flex-direction: column;
