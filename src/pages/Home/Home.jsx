@@ -29,7 +29,7 @@ function Home() {
         <h2>What Students Say</h2>
         <div className="testimonial">
           <p>"Study Buddy helped me stay on track with my coursework!"</p>
-          <h4>- Alex Johnson</h4>
+          <h4>- Alex Russ</h4>
         </div>
         <div className="testimonial">
           <p>"I met amazing study partners and improved my grades!"</p>
