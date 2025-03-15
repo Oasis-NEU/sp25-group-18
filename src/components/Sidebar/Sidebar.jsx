@@ -1,10 +1,13 @@
 import React from 'react';
-import { Typography, Autocomplete, TextField, FormControlLabel, Radio, RadioGroup, Checkbox } from '@mui/material';
+import { Typography, Autocomplete, TextField, FormControlLabel, Checkbox } from '@mui/material';
 import styles from './Sidebar.module.css';
 
-const courses = ["CS2500", "CS3000", "MATH1234", "PHIL1101", "BIO1103", "ECON2001"];
+const courses = ["CS2500", "CS3000", "MATH1234", "PHIL1101", "BIOL1111", "ECON2001"];
 
 const Sidebar = ({ filters, setFilters }) => {
+  const today = new Date().toISOString().split('T')[0]; // Get "YYYY-MM-DD" format
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0]; // Tomorrow's date
+
   return (
     <aside className={styles.sidebar}>
       <Typography variant="h6" className={styles.filterTitle}>Course Code</Typography>
@@ -17,64 +20,72 @@ const Sidebar = ({ filters, setFilters }) => {
       />
 
       <Typography variant="h6" className={styles.filterTitle}>Date</Typography>
-      <RadioGroup value={filters.date} onChange={(e) => setFilters({ ...filters, date: e.target.value })}>
-        <FormControlLabel value={new Date().toISOString().split('T')[0]} control={<Radio />} label="Today" />
-        <FormControlLabel 
-          value={new Date(Date.now() + 86400000).toISOString().split('T')[0]} 
-          control={<Radio />} 
-          label="Tomorrow" 
+      {[
+        { label: "Today", value: today },
+        { label: "Tomorrow", value: tomorrow },
+        { label: "This Weekend", value: "weekend" },
+        { label: "Custom", value: "custom" }
+      ].map(({ label, value }) => (
+        <FormControlLabel
+          key={value}
+          control={
+            <Checkbox
+              checked={filters.date === value}
+              onChange={() =>
+                setFilters((prev) => ({
+                  ...prev,
+                  date: prev.date === value ? "" : value, // Toggle date correctly
+                }))
+              }
+            />
+          }
+          label={label}
         />
-        <FormControlLabel 
-          value="weekend" 
-          control={<Radio />} 
-          label="This Weekend" 
-        />
-        <FormControlLabel value="custom" control={<Radio />} label="Custom" />
-      </RadioGroup>
-      
+      ))}
+
       <Typography variant="h6" className={styles.filterTitle}>Format</Typography>
-      <RadioGroup value={filters.format} onChange={(e) => setFilters({ ...filters, format: e.target.value })}>
-        <FormControlLabel value="offline" control={<Radio />} label="Offline" />
-        <FormControlLabel value="online" control={<Radio />} label="Online" />
-      </RadioGroup>
+      {["offline", "online"].map((format) => (
+        <FormControlLabel
+          key={format}
+          control={
+            <Checkbox
+              checked={filters.format === format}
+              onChange={() =>
+                setFilters((prev) => ({
+                  ...prev,
+                  format: prev.format === format ? "" : format, // Toggle selection
+                }))
+              }
+            />
+          }
+          label={format === "offline" ? "Offline" : "Online"}
+        />
+      ))}
 
       <Typography variant="h6" className={styles.filterTitle}>Group Size</Typography>
-      <FormControlLabel 
-        control={<Checkbox 
-          checked={filters.groupSize?.includes("small") || false} 
-          onChange={(e) => {
-            const newGroupSize = e.target.checked 
-              ? [...(filters.groupSize || []), "small"] 
-              : filters.groupSize.filter(size => size !== "small");
-            setFilters({ ...filters, groupSize: newGroupSize });
-          }} 
-        />} 
-        label="2-5 people" 
-      />
-      <FormControlLabel 
-        control={<Checkbox 
-          checked={filters.groupSize?.includes("medium") || false} 
-          onChange={(e) => {
-            const newGroupSize = e.target.checked 
-              ? [...(filters.groupSize || []), "medium"] 
-              : filters.groupSize.filter(size => size !== "medium");
-            setFilters({ ...filters, groupSize: newGroupSize });
-          }} 
-        />} 
-        label="6-10 people" 
-      />
-      <FormControlLabel 
-        control={<Checkbox 
-          checked={filters.groupSize?.includes("large") || false} 
-          onChange={(e) => {
-            const newGroupSize = e.target.checked 
-              ? [...(filters.groupSize || []), "large"] 
-              : filters.groupSize.filter(size => size !== "large");
-            setFilters({ ...filters, groupSize: newGroupSize });
-          }} 
-        />} 
-        label="10+ people" 
-      />
+      {["small", "medium", "large"].map((size, index) => (
+        <FormControlLabel
+          key={index}
+          control={
+            <Checkbox
+              checked={filters.groupSize?.includes(size) || false}
+              onChange={(e) => {
+                setFilters((prev) => ({
+                  ...prev,
+                  groupSize: e.target.checked
+                    ? [...(prev.groupSize || []), size]
+                    : prev.groupSize.filter((s) => s !== size),
+                }));
+              }}
+            />
+          }
+          label={
+            size === "small" ? "2-5 people" :
+            size === "medium" ? "6-10 people" :
+            "10+ people"
+          }
+        />
+      ))}
     </aside>
   );
 };
