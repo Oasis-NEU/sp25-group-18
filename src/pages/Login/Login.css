@@ -1,0 +1,83 @@
+/* Styles specific to LoginPage and SignUpPage */
+
+/* Layout for Login/SignUp pages */
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loginContainer {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Input fields styling */
+.inputGroup {
+  margin-bottom: 15px;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Button styling */
+.loginButton {
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(121, 183, 188);
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.loginButton:hover {
+  background-color: rgb(100, 160, 170);
+}
+
+/* Error message styling */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Sign-up link styling */
+.signupLink {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.signupLink a {
+  color: rgb(121, 183, 188);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signupLink a:hover {
+  text-decoration: underline;
+}
