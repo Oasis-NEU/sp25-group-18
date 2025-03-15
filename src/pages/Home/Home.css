@@ -1,0 +1,100 @@
+/* Styles specific to the HomePage component */
+
+/* Title and Header */
+.Title {
+    position: absolute;
+    top: 50%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255);
+    font-size: 190px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+  }
+  
+  .Header {
+    white-space: nowrap;
+    position: absolute;
+    top: 15%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255);
+    font-size: 80px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+  }
+  
+  /* Text descriptions */
+  .text1 {
+    white-space: nowrap;
+    position: absolute;
+    top: 27%;
+    left: 5%;
+    color: rgb(255, 255, 255);
+    font-size: 35px;
+    font-weight: bold;
+    text-align: left;
+    z-index: 1;
+  }
+  
+  .text2 {
+    white-space: nowrap;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(121, 183, 188);
+    font-size: 60px;
+    font-weight: bold;
+    text-align: left;
+    z-index: 1;
+  }
+  
+  /* Button */
+  .button1 {
+    position: absolute;
+    top: 58vh;
+    left: 10vw;
+    width: 25vw;
+    height: 15vh;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50px;
+    z-index: 0;
+  }
+  
+  /* Rectangular Backgrounds */
+  .titleRect {
+    position: absolute;
+    top: 15vh;
+    left: 1vw;
+    width: 97vw;
+    height: 80vh;
+    background-color: rgb(121, 183, 188);
+    border-radius: 50px;
+    z-index: 0;
+  }
+  
+  .bodyRect1 {
+    position: absolute;
+    top: 105vh;
+    left: 1vw;
+    width: 80vw;
+    height: 80vh;
+    background-color: rgb(121, 183, 188);
+    border-radius: 50px;
+    z-index: 0;
+  }
+  
+  /* Image */
+  .bodyImg1 {
+    position: absolute;
+    top: 105vh;
+    right: 1vw;
+    width: 50vw;
+    height: 80vh;
+    border-radius: 50px;
+    z-index: 0;
+  }
+  
