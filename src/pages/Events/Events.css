@@ -22,6 +22,7 @@
  margin-left: 290px;
  padding: 20px;
  overflow-x: hidden;
+ min-width: 400px;
 }
 .discover-events {
  text-align: left;
