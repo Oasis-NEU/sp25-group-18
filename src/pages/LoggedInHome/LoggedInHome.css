@@ -1,6 +1,34 @@
-/* Home */
+.dashboard-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+  width: 100%;
+  min-height: 80vh;
+  margin-top: 100px;
+}
+
 .welcome {
-  margin-top: 25rem;
-  margin-left: -50rem;
-  padding-left: -15rem;
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center; /* Center the text horizontally */
+  height: 100%; /* Ensure it takes up space properly */
+}
+
+.events-section {
+  flex: 2;
+  max-width: 800px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }

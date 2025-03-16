@@ -51,7 +51,7 @@ const SessionCard = ({ session, onJoin }) => {
 
         <div className={styles.footer}>
           <Typography variant="body2" className={styles.participants}>
-            <PeopleIcon fontSize="small" /> {session.participants ? session.participants.length : 0}/{session.max_participants}
+            <PeopleIcon fontSize="small" /> {session.participant_count || 0}/{session.max_participants}
           </Typography>
           <Button 
             variant="contained" 

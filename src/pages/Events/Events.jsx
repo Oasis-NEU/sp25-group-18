@@ -30,17 +30,17 @@ const Events = () => {
 
     fetchEvents();
   }, []);
-
+  
   useEffect(() => {
     let filtered = events || [];
-
+  
     if (filters.course) {
       filtered = filtered.filter(
         (event) =>
           event.course_code?.toLowerCase() === filters.course.toLowerCase()
       );
     }
-
+  
     if (filters.date && filters.date !== "weekend") {
       filtered = filtered.filter((event) =>
         event.time?.startsWith(filters.date)
@@ -52,11 +52,11 @@ const Events = () => {
         return eventDate.getDay() === 6 || eventDate.getDay() === 0;
       });
     }
-
+  
     if (filters.format) {
       filtered = filtered.filter((event) => event.format === filters.format);
     }
-
+  
     if (Array.isArray(filters.groupSize) && filters.groupSize.length > 0) {
       filtered = filtered.filter((event) => {
         const size = event.max_participants || 0;
@@ -67,10 +67,81 @@ const Events = () => {
         );
       });
     }
-
+  
     setFilteredEvents(filtered);
   }, [filters, events]);
-
+  
+  const handleJoin = async (sessionId) => {
+    const { data: { user } } = await supabase.auth.getUser();
+  
+    if (!user) {
+      alert("You must be logged in to join an event.");
+      return;
+    }
+  
+    // Check if user is already in the session
+    const { data: existingEntry } = await supabase
+      .from("user_sessions")
+      .select("*")
+      .eq("user_id", user.id)
+      .eq("session_id", sessionId)
+      .maybeSingle();
+  
+    if (existingEntry) {
+      alert("You're already in this session.");
+      return;
+    }
+  
+    // Insert user into user_sessions
+    const { error: insertError } = await supabase
+      .from("user_sessions")
+      .insert([{ user_id: user.id, session_id: sessionId }]);
+  
+    if (insertError) {
+      console.error("Error joining session:", insertError);
+      alert("Failed to join event. Try again.");
+      return;
+    }
+  
+    // Fetch the current participant count
+    const { data: sessionData, error: fetchError } = await supabase
+      .from("studysessions")
+      .select("participant_count")
+      .eq("id", sessionId)
+      .maybeSingle();
+  
+    if (fetchError || !sessionData) {
+      console.error("Error fetching participant count:", fetchError);
+      alert("Failed to fetch participant count.");
+      return;
+    }
+  
+    const newCount = (sessionData.participant_count || 0) + 1;
+  
+    // Update the participant count in studysessions
+    const { error: updateError } = await supabase
+      .from("studysessions")
+      .update({ participant_count: newCount })
+      .eq("id", sessionId);
+  
+    if (updateError) {
+      console.error("Error updating participant count:", updateError);
+      alert("Failed to update participant count.");
+      return;
+    }
+  
+    alert("Successfully joined the event!");
+  
+    // Refresh state to reflect the new participant count
+    setEvents((prevEvents) =>
+      prevEvents.map((event) =>
+        event.id === sessionId
+          ? { ...event, participant_count: newCount }
+          : event
+      )
+    );
+  };
+  
   return (
     <>
       <LoggedInNavbar />
@@ -78,7 +149,7 @@ const Events = () => {
         <Sidebar filters={filters} setFilters={setFilters} />
         <div className="content-container">
           <h2 className="discover-events">Discover events</h2>
-          <EventsFeed events={filteredEvents} />
+          <EventsFeed events={filteredEvents} onJoin={handleJoin} />
         </div>
       </div>
     </>

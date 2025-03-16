@@ -13,26 +13,44 @@ function LoginPage({ setUser }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
+  
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-
+  
       if (error) {
         setError(error.message);
         return;
       }
-
+  
       if (data.user) {
-        console.log("User logged in:", data.user);
-        setUser(data.user); // Save user in state to update navbar
-        navigate("/loggedInHome"); // Redirect to home page
+        console.log("✅ User logged in:", data.user);
+  
+        // 🔹 Fetch user details from the 'users' table
+        const { data: userData, error: userError } = await supabase
+          .from("users")
+          .select("*")
+          .eq("id", data.user.id)
+          .maybeSingle(); // ✅ Prevents error if user doesn’t exist
+  
+        if (userError) {
+          console.warn("⚠️ Error fetching user data:", userError);
+        }
+  
+        if (!userData) {
+          console.warn("⚠️ User not found in users table. Possibly missing from sign-up.");
+          setError("No user data found.");
+          return;
+        }
+  
+        setUser(userData); // ✅ Save user details in state
+        navigate("/loggedInHome"); // Redirect to logged-in home
       }
     } catch (err) {
       setError("Something went wrong. Please try again.");
-      console.error("Login error:", err);
+      console.error("❌ Login error:", err);
     }
   };
 
