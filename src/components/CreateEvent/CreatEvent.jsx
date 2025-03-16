@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./CreateEvent.css";
 import "../../index.css";
+import LoggedInNavbar from "../LoggedInNavBar/Navbar/LoggedInnavbar";
 
 const CreateEventForm = () => {
   // Existing state for the other inputs

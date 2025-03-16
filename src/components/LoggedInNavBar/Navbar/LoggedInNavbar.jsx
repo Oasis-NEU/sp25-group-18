@@ -14,10 +14,10 @@ const LoggedInNavbar = () => {
         <Link to="/Events" className="auth-link">
           Events
         </Link>
-        <Link to="/My" className="auth-link">
+        <Link to="/Create" className="auth-link">
           Create
         </Link>
-        <Link to="/Create" className="auth-link">
+        <Link to="/My" className="auth-link">
           My
         </Link>
       </div>
