@@ -1,29 +1,36 @@
-/* Styles specific to the HomePage component */
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-/* Title and Header */
-.Title {
-    position: absolute;
-    top: 50%;
-    left: 49%;
-    transform: translate(-50%, -50%);
-    color: rgb(255, 255, 255);
-    font-size: 190px;
-    font-weight: bold;
+/* Page Container */
+.home-container {
+  margin: auto;
+  background: linear-gradient(to bottom, #eef2ff, #c7d2fe);
+  min-height: 100vh;
+  width: 80vw; /* Ensure it takes full viewport width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+  overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+}
+
+body {
+  background: linear-gradient(to bottom, #eef2ff, #c7d2fe);
+  margin: 0 auto;
+  padding: 0;
+  width: 100vw;
+}
+
+/* Header Section */
+.header {
     text-align: center;
-    z-index: 1;
-  }
-  
-  .Header {
-    white-space: nowrap;
-    position: absolute;
-    top: 15%;
-    left: 49%;
-    transform: translate(-50%, -50%);
-    color: rgb(255, 255, 255);
-    font-size: 80px;
-    font-weight: bold;
-    text-align: center;
-    z-index: 1;
+    padding: 5px 5px;  /* Increase padding to make it larger */
+    margin-top: 0px; /* Reduce spacing */
   }
   
   /* Text descriptions */
@@ -35,66 +42,109 @@
     color: rgb(255, 255, 255);
     font-size: 35px;
     font-weight: bold;
-    text-align: left;
-    z-index: 1;
+    color: #2074d4;
   }
   
-  .text2 {
-    white-space: nowrap;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(121, 183, 188);
-    font-size: 60px;
-    font-weight: bold;
-    text-align: left;
-    z-index: 1;
+  .header p {
+    font-size: 45px;  /* Slightly bigger text */
+    color: #4a4a4a;
+    margin: 15px 0;
+    margin-top: 50px; /* Reduce spacing */
+  }
+
+  .cta-button {
+    margin-top: 20px;
+    padding: 16px 32px; /* Increase padding for a bigger button */
+    font-size: 22px; /* Increase font size */
+    font-weight: bold; /* Make text bolder */
+    color: white;
+    background: #7cb4bc;
+    border: none;
+    border-radius: 12px; /* Slightly larger rounded corners */
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
   }
   
-  /* Button */
-  .button1 {
-    position: absolute;
-    top: 58vh;
-    left: 10vw;
-    width: 25vw;
-    height: 15vh;
-    background-color: rgb(255, 255, 255);
-    border-radius: 50px;
-    z-index: 0;
+  .cta-button:hover {
+    background: #7cb4bc;
+    transform: scale(1.05); /* Slightly enlarge on hover */
   }
-  
-  /* Rectangular Backgrounds */
-  .titleRect {
-    position: absolute;
-    top: 15vh;
-    left: 1vw;
-    width: 97vw;
-    height: 80vh;
-    background-color: rgb(121, 183, 188);
-    border-radius: 50px;
-    z-index: 0;
-  }
-  
-  .bodyRect1 {
-    position: absolute;
-    top: 105vh;
-    left: 1vw;  
-    width: 80vw;
-    height: 80vh;
-    background-color: rgb(121, 183, 188);
-    border-radius: 50px;
-    z-index: 0;
-  }
-  
-  /* Image */
-  .bodyImg1 {
-    position: absolute;
-    top: 105vh;
-    right: 1vw;
-    width: 50vw;
-    height: 80vh;
-    border-radius: 50px;
-    z-index: 0;
-  }
-  
+
+
+.step h3 {
+  color: #2074d4;
+}
+
+.content-sections {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to the top */
+  gap: 40px; /* Space between the two sections */
+  width: 80%;
+  max-width: 1200px; /* Keep it responsive */
+  margin-top: 50px; /* Space from header */
+}
+
+/* Who We Are Section */
+.who-we-are {
+  width: 48%; /* Make it take up half the space */
+  max-width: 500px;
+  padding: 60px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+  background: white;
+}
+
+.who-we-are h2 {
+  font-size: 40px; /* Adjust title size */
+}
+
+.who-we-are p {
+  font-size: 20px; /* Decrease text size */
+}
+
+h2 {
+  font-size: 28px;
+  color: #2074d4;
+}
+
+/* Get Started Section */
+.get-started {
+  width: 48%; /* Make it take up half the space */
+  max-width: 500px;
+  padding: 55px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+  background: white; /* Light blue background */
+}
+
+.get-started h2 {
+  font-size: 40px; /* Adjust heading size */
+}
+
+.get-started p {
+  font-size: 18px; /* Adjust paragraph text size */
+}
+
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  width: 100%;
+  background: #2074d4;
+  color: white;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
