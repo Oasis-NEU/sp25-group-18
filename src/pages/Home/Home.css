@@ -51,7 +51,7 @@ body {
     font-size: 22px; /* Increase font size */
     font-weight: bold; /* Make text bolder */
     color: white;
-    background: #2074d4;
+    background: #7cb4bc;
     border: none;
     border-radius: 12px; /* Slightly larger rounded corners */
     cursor: pointer;
@@ -59,7 +59,7 @@ body {
   }
   
   .cta-button:hover {
-    background: #1a5fb4;
+    background: #7cb4bc;
     transform: scale(1.05); /* Slightly enlarge on hover */
   }
 
