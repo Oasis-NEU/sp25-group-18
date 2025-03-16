@@ -8,6 +8,7 @@
 
 /* Page Container */
 .home-container {
+  margin: auto;
   background: linear-gradient(to bottom, #eef2ff, #c7d2fe);
   min-height: 100vh;
   width: 80vw; /* Ensure it takes full viewport width */
@@ -20,7 +21,7 @@
 
 body {
   background: linear-gradient(to bottom, #eef2ff, #c7d2fe);
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   width: 100vw;
 }
