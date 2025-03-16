@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import "./LoggedInNavBar.css";
 
 const LoggedInNavbar = () => {
   return (
@@ -12,13 +12,13 @@ const LoggedInNavbar = () => {
       <ul className="nav-links"></ul>
       <div className="navbar-right">
         <Link to="/Events" className="auth-link">
-          Login
+          Events
         </Link>
         <Link to="/My" className="auth-link">
-          Login
+          Create
         </Link>
         <Link to="/Create" className="auth-link">
-          Sign Up
+          My
         </Link>
       </div>
     </nav>
