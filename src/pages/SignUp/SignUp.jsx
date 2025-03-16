@@ -10,57 +10,51 @@ function SignUpPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const navigate = useNavigate(); // We'll use this to navigate after sign up
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!name || !email || !password) {
       setError("All fields are required!");
       return;
     }
-
-    try {
-      // Sign up the user using Supabase Auth (auth only stores email and password)
-      const { data, error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (signUpError) {
-        setError(signUpError.message);
-        return;
-      }
-
-      // After successful sign-up, store additional user info (name) in the custom 'users' table
-      const { error: insertError } = await supabase.from("users").insert([
-        {
-          name,
-          email,
-          user_id: data.user.id, // Use the user_id from Supabase Auth
-        },
-      ]);
-
-      if (insertError) {
-        setError("Error storing additional user info: " + insertError.message);
-        return;
-      }
-
-      // If everything is successful, show success message
-      setSuccess(
-        "Account created successfully! Please check your email to confirm."
-      );
-
-      // Optionally navigate to login page after successful signup
-      setTimeout(() => navigate("/login"), 2000); // Redirect after 2 seconds
-
-      // Reset form
-      setName("");
-      setEmail("");
-      setPassword("");
-    } catch (err) {
-      setError("Something went wrong, please try again.");
+  
+    // 🔹 Sign up user with Supabase Auth
+    const { data, error: signUpError } = await supabase.auth.signUp({ email, password });
+  
+    if (signUpError) {
+      console.error("Sign-up error:", signUpError);
+      setError(signUpError.message);
+      return;
     }
+  
+    if (!data.user) {
+      console.error("User sign-up failed, no user object returned.");
+      setError("User signup failed.");
+      return;
+    }
+  
+    console.log("✅ New user created in Supabase Auth:", data.user.id);
+  
+    // 🔹 Insert user into 'users' table (MUST use the same ID from Auth!)
+    const { error: insertError } = await supabase.from("users").insert([
+      {
+        id: data.user.id, // ✅ Use the SAME UUID from Supabase Auth!
+        name,
+        email,
+      },
+    ]);
+  
+    if (insertError) {
+      console.error("❌ Error inserting user into users table:", insertError);
+      setError("Error storing user info: " + insertError.message);
+      return;
+    }
+  
+    console.log("✅ User successfully added to users table with correct ID");
+  
+    setSuccess("Account created successfully! Check your email to confirm.");
   };
 
   return (
