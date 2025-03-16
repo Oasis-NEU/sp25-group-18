@@ -30,6 +30,7 @@ body {
 .header {
     text-align: center;
     padding: 5px 5px;  /* Increase padding to make it larger */
+    margin-top: 0px; /* Reduce spacing */
   }
   
   .header h1 {
@@ -39,67 +40,62 @@ body {
   }
   
   .header p {
-    font-size: 30px;  /* Slightly bigger text */
+    font-size: 45px;  /* Slightly bigger text */
     color: #4a4a4a;
     margin: 15px 0;
+    margin-top: 50px; /* Reduce spacing */
   }
 
-.cta-button {
-  margin-top: 15px;
-  padding: 12px 24px;
-  font-size: 18px;
-  color: white;
-  background: #2074d4;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-}
+  .cta-button {
+    margin-top: 20px;
+    padding: 16px 32px; /* Increase padding for a bigger button */
+    font-size: 22px; /* Increase font size */
+    font-weight: bold; /* Make text bolder */
+    color: white;
+    background: #7cb4bc;
+    border: none;
+    border-radius: 12px; /* Slightly larger rounded corners */
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  }
+  
+  .cta-button:hover {
+    background: #7cb4bc;
+    transform: scale(1.05); /* Slightly enlarge on hover */
+  }
 
-.cta-button:hover {
-  background: #2074d4;
-}
-
-/* How It Works Section */
-.how-it-works {
-  background: white;
-  width: 80%;
-  max-width: 700px;
-  padding: 30px;
-  text-align: center;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-}
-
-.steps {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.step {
-  background: #f8f9ff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-}
 
 .step h3 {
   color: #2074d4;
 }
 
+.content-sections {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to the top */
+  gap: 40px; /* Space between the two sections */
+  width: 80%;
+  max-width: 1200px; /* Keep it responsive */
+  margin-top: 50px; /* Space from header */
+}
+
 /* Who We Are Section */
 .who-we-are {
-  background: white;
-  width: 80%;
-  max-width: 600px;
-  padding: 30px;
+  width: 48%; /* Make it take up half the space */
+  max-width: 500px;
+  padding: 60px;
   text-align: center;
   border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  margin: 10px 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+  background: white;
+}
+
+.who-we-are h2 {
+  font-size: 40px; /* Adjust title size */
+}
+
+.who-we-are p {
+  font-size: 20px; /* Decrease text size */
 }
 
 h2 {
@@ -107,36 +103,25 @@ h2 {
   color: #2074d4;
 }
 
-/* Testimonials Section */
-.testimonials {
-  background: white;
-  width: 80%;
-  max-width: 700px;
-  padding: 30px;
+/* Get Started Section */
+.get-started {
+  width: 48%; /* Make it take up half the space */
+  max-width: 500px;
+  padding: 55px;
   text-align: center;
   border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+  background: white; /* Light blue background */
 }
 
-.testimonial {
-  background: #f8f9ff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  margin: 10px 0;
+.get-started h2 {
+  font-size: 40px; /* Adjust heading size */
 }
 
-.testimonial p {
-  font-style: italic;
-  color: #333;
+.get-started p {
+  font-size: 18px; /* Adjust paragraph text size */
 }
 
-.testimonial h4 {
-  margin-top: 10px;
-  color: #2074d4;
-  font-size: 16px;
-}
 
 /* Footer */
 .footer {
