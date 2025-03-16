@@ -28,7 +28,7 @@ function LoginPage({ setUser }) {
       if (data.user) {
         console.log("User logged in:", data.user);
         setUser(data.user); // Save user in state to update navbar
-        navigate("/"); // Redirect to home page
+        navigate("/loggedInHome"); // Redirect to home page
       }
     } catch (err) {
       setError("Something went wrong. Please try again.");

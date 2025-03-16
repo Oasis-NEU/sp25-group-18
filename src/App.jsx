@@ -5,6 +5,7 @@ import Events from "../src/pages/Events/Events";
 import Create from "../src/pages/Create/Create";
 import Login from "../src/pages/Login/Login";
 import SignUp from "../src/pages/SignUp/SignUp";
+import LoggedInHome from "../src/pages/LoggedInHome/LoggedInHome";
 import { useState, useEffect } from "react";
 import supabase from "./supabaseClient";
 
@@ -54,11 +55,13 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-      <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/events" element={<Events />} />
         <Route path="/create" element={<Create />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/my" element={<Events />} />
+        <Route path="/loggedInHome" element={<LoggedInHome />} />
       </Routes>
     </Router>
   );
