@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-const Navbar = () => {
+const LoggedInNavbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -11,10 +11,13 @@ const Navbar = () => {
       </div>
       <ul className="nav-links"></ul>
       <div className="navbar-right">
-        <Link to="/login" className="auth-link">
+        <Link to="/Events" className="auth-link">
           Login
         </Link>
-        <Link to="/signup" className="auth-link">
+        <Link to="/My" className="auth-link">
+          Login
+        </Link>
+        <Link to="/Create" className="auth-link">
           Sign Up
         </Link>
       </div>
@@ -22,4 +25,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default LoggedInNavbar;

@@ -54,11 +54,13 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-      <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/events" element={<Events />} />
         <Route path="/create" element={<Create />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/my" element={<Events />} />
+        <Route path="/loggedInHome" element={<LoggedInHome />} />
       </Routes>
     </Router>
   );
