@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react";
 import "./LoggedInHome.css";
-import supabase from "../../supabaseClient";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import EventsFeed from "../../components/EventsFeed/EventsFeed";
 import LoggedInNavbar from "../../components/LoggedInNavBar/Navbar/LoggedInnavbar";
+import PropTypes from "prop-types";
 
-function LoggedInHome() {
+function LoggedInHome({ user }) {
+  if (!user) {
+    return <div>Loading...</div>; // Fallback for when user is still null
+  }
   return (
     <>
       <LoggedInNavbar />
       <div className="welcome">
-        <h1>Hi, Michael</h1>
+        <h1>Hi, {user.name}</h1>
         <h2>Ready to Find a Study Buddy?</h2>
       </div>
     </>
-    // Put in Event Page for My Events Here, Make it to the right of the text
   );
 }
+
+LoggedInHome.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default LoggedInHome;
