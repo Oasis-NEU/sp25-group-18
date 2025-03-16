@@ -5,7 +5,7 @@ const LoggedInNavbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <Link to="/home" className="logo">
+        <Link to="/loggedInHome" className="logo">
           StudyBuddy
         </Link>
       </div>

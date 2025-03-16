@@ -5,6 +5,7 @@ import Events from "../src/pages/Events/Events";
 import Create from "../src/pages/Create/Create";
 import Login from "../src/pages/Login/Login";
 import SignUp from "../src/pages/SignUp/SignUp";
+import LoggedInHome from "../src/pages/LoggedInHome/LoggedInHome";
 import { useState, useEffect } from "react";
 import supabase from "./supabaseClient";
 
