@@ -14,16 +14,16 @@
 }
 
 .formBox {
-  background: #1e1e1e;
+  background: #ffffff;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 15px rgba(247, 235, 235, 0.2);
   width: 100%;
   max-width: 400px;
 }
 
 .input {
-  background-color: #2a2a2a;
+  background-color: #fffcfc;
   border-radius: 5px;
 }
 

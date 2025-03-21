@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import supabase from "../../supabaseClient";
-import { TextField, Button, MenuItem, Container, Box, Typography } from "@mui/material";
+import {
+  TextField,
+  Button,
+  MenuItem,
+  Container,
+  Box,
+  Typography,
+} from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./CreateEvent.module.css";
 
@@ -51,13 +58,16 @@ const CreateEvent = () => {
       title: eventData.title,
       format: eventData.format,
       location: eventData.format === "offline" ? eventData.location : null,
-      meeting_link: eventData.format === "online" ? eventData.meeting_link : null,
+      meeting_link:
+        eventData.format === "online" ? eventData.meeting_link : null,
       time: eventData.time ? new Date(eventData.time).toISOString() : null,
       max_participants: parseInt(eventData.max_participants) || 10,
       created_at: new Date().toISOString(),
     };
 
-    const { data, error } = await supabase.from("studysessions").insert([newEvent]);
+    const { data, error } = await supabase
+      .from("studysessions")
+      .insert([newEvent]);
 
     if (error) {
       console.error("Error creating event:", error);
@@ -161,7 +171,13 @@ const CreateEvent = () => {
             className={styles.input}
           />
 
-          <Button type="submit" variant="contained" color="primary" fullWidth className={styles.button}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            className={styles.button}
+          >
             Create Event
           </Button>
         </form>
