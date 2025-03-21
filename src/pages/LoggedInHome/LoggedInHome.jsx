@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "./LoggedInHome.css";
 import LoggedInNavbar from "../../components/LoggedInNavBar/Navbar/LoggedInnavbar";
 import PropTypes from "prop-types";
+import supabase from "../../supabaseClient";
+import EventsFeed from "../../components/EventsFeed/EventsFeed";
 
 function LoggedInHome() {
   const [userName, setUserName] = useState("");
@@ -9,8 +11,10 @@ function LoggedInHome() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
       if (user) {
         // Fetch user name
         const { data: userData, error: userError } = await supabase
@@ -34,7 +38,7 @@ function LoggedInHome() {
         if (sessionError) {
           console.error("Error fetching user sessions:", sessionError);
         } else if (sessionEntries.length > 0) {
-          const sessionIds = sessionEntries.map(entry => entry.session_id);
+          const sessionIds = sessionEntries.map((entry) => entry.session_id);
 
           const { data: eventData, error: eventError } = await supabase
             .from("studysessions")
@@ -57,15 +61,15 @@ function LoggedInHome() {
     <>
       <LoggedInNavbar />
       <div className="dashboard-container">
-  <div className="welcome">
-    <h1>Hi, {userName || "User"}</h1>
-    <h2>Ready to Find a Study Buddy?</h2>
-  </div>
-  <div className="events-section">
-    <h2>My Events</h2>
-    <EventsFeed events={myEvents} />
-  </div>
-</div>
+        <div className="welcome">
+          <h1>Hi, {userName || "User"}</h1>
+          <h2>Ready to Find a Study Buddy?</h2>
+        </div>
+        <div className="events-section">
+          <h2>My Events</h2>
+          <EventsFeed events={myEvents} />
+        </div>
+      </div>
     </>
   );
 }
