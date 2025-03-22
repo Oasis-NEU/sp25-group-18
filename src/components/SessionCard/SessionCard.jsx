@@ -18,6 +18,7 @@ const SessionCard = ({ session, onJoin }) => {
     }
   }
 
+
   return (
     <Card className={styles.card} elevation={3}>
       <CardContent>
@@ -60,7 +61,7 @@ const SessionCard = ({ session, onJoin }) => {
             onClick={() => onJoin(session.id)}
             disabled={session.participants?.length >= session.max_participants}
           >
-            {session.participants?.length >= session.max_participants ? "Full" : "Join"}
+            {session.participants?.length >= session.max_participants ? "Full" : "Join/Leave"}
           </Button>
         </div>
       </CardContent>

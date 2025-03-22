@@ -37,7 +37,7 @@ const Events = () => {
     if (filters.course) {
       filtered = filtered.filter(
         (event) =>
-          event.course_code?.toLowerCase() === filters.course.toLowerCase()
+          event.title?.toLowerCase().includes(filters.course.toLowerCase())
       );
     }
   
@@ -86,9 +86,62 @@ const Events = () => {
       .eq("user_id", user.id)
       .eq("session_id", sessionId)
       .maybeSingle();
-  
-    if (existingEntry) {
+    
+
+    {/*if (existingEntry) {
       alert("You're already in this session.");
+      return;
+    }*/}
+
+    if (existingEntry) {
+      const{error: deleteError} = await supabase
+        .from("user_sessions")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("session_id", sessionId)
+        .maybeSingle(); 
+      
+      if(deleteError){
+        console.error("Error joining session:", deleteError);
+        alert("Failed to leave event. Try again.");
+        return;
+      }
+      //Get current participant number
+      const{data: sessionData, error: fetchError} = await supabase  
+        .from("studysessions")
+        .select("participant_count")
+        .eq("id", sessionId)
+        .maybeSingle();  
+
+      if(fetchError || !sessionData){
+        console.error("Error fetching participant count:", fetchError);
+        alert("Failed to fetch participant count.");
+        return;
+      }
+      const newCount = Math.max((sessionData.participant_count || 1) - 1, 0);
+  
+      // Update the participant count in studysessions
+      const { error: updateError } = await supabase
+        .from("studysessions")
+        .update({ participant_count: newCount })
+        .eq("id", sessionId);
+      
+      if (updateError) {
+        console.error("Error updating participant count:", updateError);
+        alert("Failed to update participant count.");
+        return;
+      }
+      
+      alert("You have left the event.");
+      
+      // Refresh state to reflect the new participant count
+      setEvents((prevEvents) =>
+        prevEvents.map((event) =>
+          event.id === sessionId
+            ? { ...event, participant_count: newCount }
+            : event
+        )
+      );
       return;
     }
   
@@ -104,11 +157,11 @@ const Events = () => {
     }
   
     // Fetch the current participant count
-    const { data: sessionData, error: fetchError } = await supabase
-      .from("studysessions")
-      .select("participant_count")
-      .eq("id", sessionId)
-      .maybeSingle();
+      const { data: sessionData, error: fetchError } = await supabase
+        .from("studysessions")
+        .select("participant_count")
+        .eq("id", sessionId)
+        .maybeSingle();
   
     if (fetchError || !sessionData) {
       console.error("Error fetching participant count:", fetchError);

@@ -1,8 +1,6 @@
 import React from 'react';
-import { Typography, Autocomplete, TextField, FormControlLabel, Checkbox } from '@mui/material';
+import { Typography, TextField, FormControlLabel, Checkbox } from '@mui/material';
 import styles from './Sidebar.module.css';
-
-const courses = ["CS2500", "CS3000", "MATH1234", "PHIL1101", "BIOL1111", "ECON2001"];
 
 const Sidebar = ({ filters, setFilters }) => {
   const today = new Date().toISOString().split('T')[0]; // Get "YYYY-MM-DD" format
@@ -11,12 +9,12 @@ const Sidebar = ({ filters, setFilters }) => {
   return (
     <aside className={styles.sidebar}>
       <Typography variant="h6" className={styles.filterTitle}>Course Code</Typography>
-      <Autocomplete
-        options={courses}
-        getOptionLabel={(option) => option}
-        value={filters.course || null}
-        onChange={(event, newValue) => setFilters({ ...filters, course: newValue })}
-        renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Search course (e.g., CS2500)" />}
+      <TextField
+        variant="outlined"
+        fullWidth
+        placeholder="Search course (e.g., CS2500)"
+        value={filters.course || ''}
+        onChange={(e) => setFilters({ ...filters, course: e.target.value })}
       />
 
       <Typography variant="h6" className={styles.filterTitle}>Date</Typography>
