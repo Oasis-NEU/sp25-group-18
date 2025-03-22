@@ -18,7 +18,7 @@ const LoggedInNavbar = () => {
     <nav className="navbar">
       <div className="navbar-left">
         <Link to="/loggedInHome" className="logo">
-          StudyBuddy
+          ProcrastiMates
         </Link>
       </div>
       <ul className="nav-links"></ul>

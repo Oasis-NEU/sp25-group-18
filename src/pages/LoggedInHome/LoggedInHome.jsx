@@ -189,7 +189,7 @@ function LoggedInHome() {
       <div className="dashboard-container">
         <div className="welcome">
           <h1>Hi, {userName || "User"}</h1>
-          <h2>Ready to Find a Study Buddy?</h2>
+          <h2>Ready to Find a ProcrastiMate?</h2>
         </div>
         <div className="events-section">
           <h2>My Events</h2>

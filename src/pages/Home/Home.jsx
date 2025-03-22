@@ -8,7 +8,7 @@ function Home() {
   return (
     <div className="home-container">
       <header className="header">
-        <h1>Study Buddy</h1>
+        <h1>ProcrastiMates</h1>
         <p>Connect, collaborate, and succeed together.</p>
       </header>
 
